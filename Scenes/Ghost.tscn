@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://de5rd45iynngm"]
+
+[ext_resource type="Texture2D" uid="uid://8nyeebv0klfo" path="res://Assets/Sprites/spritesheet.png" id="1_dvimj"]
+[ext_resource type="Script" path="res://Scripts/Ghost.cs" id="2_kgdhu"]
+
+[node name="Ghost" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_dvimj")
+hframes = 12
+vframes = 4
+region_enabled = true
+region_rect = Rect2(448, 64, 192, 64)
+script = ExtResource("2_kgdhu")

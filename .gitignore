@@ -1,0 +1,6 @@
+MazeGen/
+Properties/
+export_presets.cfg
+.vs/
+# Godot 4+ specific ignores
+.godot/

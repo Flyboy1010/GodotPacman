@@ -1,0 +1,108 @@
+[gd_scene load_steps=19 format=3 uid="uid://d3lwelmk2syvt"]
+
+[ext_resource type="Script" path="res://Scripts/Game.cs" id="1_vr6ta"]
+[ext_resource type="PackedScene" uid="uid://de6d0rm7ss734" path="res://Scenes/Pacman.tscn" id="2_7fw10"]
+[ext_resource type="PackedScene" uid="uid://de5rd45iynngm" path="res://Scenes/Ghost.tscn" id="3_wrs1y"]
+[ext_resource type="Texture2D" uid="uid://8nyeebv0klfo" path="res://Assets/Sprites/spritesheet.png" id="5_ysmdo"]
+[ext_resource type="AudioStream" uid="uid://cnbjs61cnhupe" path="res://Assets/Sounds/siren_1 (mp3cut.net).wav" id="6_53ri7"]
+[ext_resource type="FontFile" uid="uid://can0obkfyaxv0" path="res://Assets/Fonts/ARCADE_N.TTF" id="6_fn12r"]
+[ext_resource type="AudioStream" uid="uid://gj7qua383rbo" path="res://Assets/Sounds/munch_1.wav" id="7_i7i8c"]
+[ext_resource type="AudioStream" uid="uid://bk01rubyca0w6" path="res://Assets/Sounds/munch_2.wav" id="8_sxjbl"]
+[ext_resource type="AudioStream" uid="uid://unjxr3hc1ema" path="res://Assets/Sounds/eat_ghost.wav" id="9_7tr3y"]
+[ext_resource type="AudioStream" uid="uid://bbs62o42ytihk" path="res://Assets/Sounds/power_pellet.wav" id="11_b0g4r"]
+[ext_resource type="AudioStream" uid="uid://bb1o0awf2gfd5" path="res://Assets/Sounds/eat_fruit.wav" id="11_gbfmo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8vtf"]
+atlas = ExtResource("5_ysmdo")
+region = Rect2(448, 128, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3mg5"]
+atlas = ExtResource("5_ysmdo")
+region = Rect2(616, 16, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ve30b"]
+atlas = ExtResource("5_ysmdo")
+region = Rect2(600, 40, 80, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4hka"]
+atlas = ExtResource("5_ysmdo")
+region = Rect2(592, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tnke"]
+atlas = ExtResource("5_ysmdo")
+region = Rect2(640, 64, 48, 128)
+
+[sub_resource type="Theme" id="Theme_q87vh"]
+default_font = ExtResource("6_fn12r")
+default_font_size = 8
+
+[sub_resource type="Theme" id="Theme_naocx"]
+default_font = ExtResource("6_fn12r")
+default_font_size = 8
+
+[node name="Game" type="Node2D"]
+position = Vector2(0, 24)
+script = ExtResource("1_vr6ta")
+pacmanScene = ExtResource("2_7fw10")
+ghostScene = ExtResource("3_wrs1y")
+dotsTexture = SubResource("AtlasTexture_o8vtf")
+readyTextTexture = SubResource("AtlasTexture_f3mg5")
+gameOverTextTexture = SubResource("AtlasTexture_ve30b")
+lifeTexture = SubResource("AtlasTexture_m4hka")
+fruitTexture = SubResource("AtlasTexture_0tnke")
+metadata/_edit_group_ = true
+
+[node name="Maze" type="Sprite2D" parent="."]
+self_modulate = Color(0.254902, 0.478431, 0.886275, 1)
+show_behind_parent = true
+texture_filter = 1
+texture = ExtResource("5_ysmdo")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 224, 248)
+
+[node name="GhostDoor" type="ColorRect" parent="."]
+offset_left = 104.0
+offset_top = 101.0
+offset_right = 120.0
+offset_bottom = 103.0
+color = Color(1, 0.717647, 1, 1)
+
+[node name="HighScore" type="Label" parent="."]
+texture_filter = 1
+offset_left = 72.0
+offset_top = -25.0
+offset_right = 152.0
+offset_bottom = -2.0
+theme = SubResource("Theme_q87vh")
+theme_override_constants/line_spacing = -1
+text = "HIGH SCORE"
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="."]
+texture_filter = 1
+offset_top = -17.0
+offset_right = 56.0
+offset_bottom = -8.0
+theme = SubResource("Theme_naocx")
+theme_override_constants/line_spacing = -1
+text = "00"
+horizontal_alignment = 2
+
+[node name="SirenSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_53ri7")
+
+[node name="Munch1Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_i7i8c")
+
+[node name="Munch2Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_sxjbl")
+
+[node name="GhostEatenSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_7tr3y")
+
+[node name="FruitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_gbfmo")
+
+[node name="PowerPelletSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_b0g4r")

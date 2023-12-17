@@ -1,0 +1,83 @@
+[gd_scene load_steps=13 format=3 uid="uid://bhhkfiv5wkapc"]
+
+[ext_resource type="PackedScene" uid="uid://d3lwelmk2syvt" path="res://Scenes/Game.tscn" id="1_8jq5i"]
+[ext_resource type="Shader" path="res://Shaders/scale3x.gdshader" id="2_su0ma"]
+[ext_resource type="Shader" path="res://Shaders/paletteChanger.gdshader" id="2_xhr35"]
+[ext_resource type="Texture2D" uid="uid://cbc6rrjct8wm4" path="res://Assets/Palettes/comfort44s-1x.png" id="3_deqxv"]
+[ext_resource type="Shader" path="res://Shaders/crt.gdshader" id="3_oq85u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qmv3w"]
+shader = ExtResource("2_xhr35")
+shader_parameter/paletteImage = ExtResource("3_deqxv")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_v7llp"]
+viewport_path = NodePath("GameViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_cdyi0"]
+viewport_path = NodePath("GameViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a8kpe"]
+resource_local_to_scene = true
+shader = ExtResource("2_su0ma")
+shader_parameter/SCREEN_TEXTURE = SubResource("ViewportTexture_cdyi0")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_nggxj"]
+viewport_path = NodePath("GameScaledViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xafjq"]
+shader = ExtResource("3_oq85u")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ld4iu"]
+viewport_path = NodePath("GameScaledViewport")
+
+[node name="GamePostProcessing" type="Node2D"]
+
+[node name="GameViewport" type="SubViewport" parent="."]
+disable_3d = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(224, 288)
+
+[node name="Game" parent="GameViewport" instance=ExtResource("1_8jq5i")]
+
+[node name="GameScaledViewport" type="SubViewport" parent="."]
+disable_3d = true
+size = Vector2i(672, 864)
+
+[node name="TextureRect" type="TextureRect" parent="GameScaledViewport"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_qmv3w")
+offset_right = 672.0
+offset_bottom = 864.0
+texture = SubResource("ViewportTexture_v7llp")
+expand_mode = 1
+
+[node name="scale3x" type="ColorRect" parent="GameScaledViewport"]
+process_mode = 4
+visible = false
+material = SubResource("ShaderMaterial_a8kpe")
+offset_right = 672.0
+offset_bottom = 864.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 6
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_nggxj")
+expand_mode = 1
+
+[node name="crt" type="TextureRect" parent="CanvasLayer"]
+process_mode = 4
+visible = false
+texture_filter = 6
+material = SubResource("ShaderMaterial_xafjq")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_ld4iu")

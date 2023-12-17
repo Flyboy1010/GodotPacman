@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cnbjs61cnhupe"
+path="res://.godot/imported/siren_1 (mp3cut.net).wav-c27f5669afc3175975ffb25578427676.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/siren_1 (mp3cut.net).wav"
+dest_files=["res://.godot/imported/siren_1 (mp3cut.net).wav-c27f5669afc3175975ffb25578427676.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=64
+edit/loop_end=18395
+compress/mode=0
