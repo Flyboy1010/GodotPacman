@@ -3,6 +3,8 @@ using System;
 
 public partial class Pacman : Actor
 {
+    private Direction selectedDirection;
+
     // eat animation frames
 
     private static readonly int[] animationFramePhase = new int[] { 1, 0, 1, 2 };
@@ -13,24 +15,16 @@ public partial class Pacman : Actor
     {
         Position = new Vector2I(112, 188);
         direction = Direction.Left;
+        selectedDirection = Direction.Left;
         animationTick = 0;
         SetStartRoundSprite();
     }
 
-    // get input
+    // set direction
 
-    private Direction GetInputDirection()
+    public void SetDirection(Direction newDirection)
     {
-        if (Input.IsActionPressed("Right"))
-            return Direction.Right;
-        else if (Input.IsActionPressed("Left"))
-            return Direction.Left;
-        else if (Input.IsActionPressed("Up"))
-            return Direction.Up;
-        else if (Input.IsActionPressed("Down"))
-            return Direction.Down;
-
-        return direction;
+        selectedDirection = newDirection;
     }
 
     // sprite frame stuff
@@ -73,7 +67,7 @@ public partial class Pacman : Actor
         /* Handle movement */
 
         Direction oldDirection = direction;
-        direction = GetInputDirection();
+        direction = selectedDirection;
 
         // check if it cant switch directions
 

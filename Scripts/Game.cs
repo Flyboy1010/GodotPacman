@@ -116,9 +116,16 @@ public partial class Game : Node2D
 
 	private List<Vector2I>[] ghostsPaths = new List<Vector2I>[4];
 
-	/* LOAD AND SAVE HIGHSCORE */
+	// called when changing the direction
 
-	private void LoadHighScore()
+	private void OnChangeDirectionSignal(Actor.Direction direction)
+	{
+		pacman.SetDirection(direction);
+	}
+
+    /* LOAD AND SAVE HIGHSCORE */
+
+    private void LoadHighScore()
 	{
 		FileAccess highScoreFile = FileAccess.Open("user://highscore.data", FileAccess.ModeFlags.Read);
 
@@ -852,7 +859,7 @@ public partial class Game : Node2D
 
 		// hide mouse cursor
 
-		DisplayServer.MouseSetMode(DisplayServer.MouseMode.Hidden);
+		// DisplayServer.MouseSetMode(DisplayServer.MouseMode.Hidden);
     }
 
     // draw (for debug)

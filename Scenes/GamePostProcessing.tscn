@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://bhhkfiv5wkapc"]
+[gd_scene load_steps=14 format=3 uid="uid://bhhkfiv5wkapc"]
 
+[ext_resource type="Script" path="res://Scripts/PacmanInputController.cs" id="1_2g25w"]
 [ext_resource type="PackedScene" uid="uid://d3lwelmk2syvt" path="res://Scenes/Game.tscn" id="1_8jq5i"]
 [ext_resource type="Shader" path="res://Shaders/scale3x.gdshader" id="2_su0ma"]
 [ext_resource type="Shader" path="res://Shaders/paletteChanger.gdshader" id="2_xhr35"]
@@ -31,6 +32,7 @@ shader = ExtResource("3_oq85u")
 viewport_path = NodePath("GameScaledViewport")
 
 [node name="GamePostProcessing" type="Node2D"]
+script = ExtResource("1_2g25w")
 
 [node name="GameViewport" type="SubViewport" parent="."]
 disable_3d = true
@@ -81,3 +83,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_ld4iu")
+
+[connection signal="ChangeDirectionSignal" from="." to="GameViewport/Game" method="OnChangeDirectionSignal"]
